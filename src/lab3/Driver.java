@@ -1,3 +1,6 @@
+package lab3;
+
+
 public class Driver {
 
     public static void main(String[] args) {
@@ -8,12 +11,12 @@ public class Driver {
         }
 
         Program3 program = new Program3();
-	int n = Integer.parseInt(args[1]);
-	int h = Integer.parseInt(args[3]);
+	    int n = Integer.parseInt(args[1]);
+	    int h = Integer.parseInt(args[3]);
         int sum_grade;
         int maxgrade = 100;
-        SquareRootGradeFunction gf = new SquareRootGradeFunction(n, maxgrade);
-//      SquareGradeFunction gf = new SquareGradeFunction(n, maxgrade);
+        CustomGradeFunction gf = new CustomGradeFunction(n, maxgrade);
+        // SquareGradeFunction gf = new SquareGradeFunction(n, maxgrade);
 
         program.initialize(n, maxgrade, gf);
         int[] hours_array = program.computeHours(h);

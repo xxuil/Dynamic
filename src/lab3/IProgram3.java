@@ -1,3 +1,5 @@
+package lab3;
+
 public interface IProgram3{
 
     /*

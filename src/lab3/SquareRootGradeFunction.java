@@ -1,3 +1,6 @@
+package lab3;
+
+
 public class SquareRootGradeFunction implements GradeFunction{
 
     private int numClasses;
