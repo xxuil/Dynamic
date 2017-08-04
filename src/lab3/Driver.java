@@ -15,7 +15,7 @@ public class Driver {
 	    int h = Integer.parseInt(args[3]);
         int sum_grade;
         int maxgrade = 100;
-        CustomGradeFunction gf = new CustomGradeFunction(n, maxgrade);
+        SquareRootGradeFunction gf = new SquareRootGradeFunction(n, maxgrade);
         // SquareGradeFunction gf = new SquareGradeFunction(n, maxgrade);
 
         program.initialize(n, maxgrade, gf);

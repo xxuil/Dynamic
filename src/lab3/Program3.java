@@ -8,10 +8,12 @@ public class Program3 implements IProgram3 {
     private int numClasses;
     private int maxGrade;
     GradeFunction gf;
+
     private int[][] grades;
     private int[][] hours;
-    private HashMap<Integer, int[]> hourMap;
-    private HashMap<Integer, int[]> gradeMap;
+
+    private int[] hourList;
+    private int[] gradeList;
 
     public Program3() {
         this.numClasses = 0;
@@ -19,8 +21,8 @@ public class Program3 implements IProgram3 {
         this.gf = null;
         this.grades = null;
         this.hours = null;
-        this.hourMap = new HashMap<Integer, int[]>();
-        this.gradeMap = new HashMap<Integer, int[]>();
+        this.hourList = null;
+        this.gradeList = null;
     }
     /* Initialization Method
      * n = number of courses
@@ -28,25 +30,52 @@ public class Program3 implements IProgram3 {
      * gf =  grade function
      */
     public void initialize(int n, int g, GradeFunction gf) {
-    	 this.numClasses = n;
-         this.maxGrade = g;
-         this.gf = gf;
+        this.numClasses = n;
+        this.maxGrade = g;
+        this.gf = gf;
+        this.grades = null;
+        this.hours = null;
+        this.hourList = null;
+        this.gradeList = null;
     }
-    
-    public int[] computeHours(int totalHours) {
-        if(hourMap.get(totalHours) == null)
-            solution(totalHours);
 
-        return hourMap.get(totalHours);
+    public int[] computeHours(int totalHours) {
+
+        dynamicSolution(totalHours);
+
+        hourList = new int[numClasses];
+
+        int i = numClasses;
+        int h = totalHours;
+        int tempHour = hours[i][h];
+
+        while(i > 0 && h >= 0){
+            if(tempHour == -1)
+                tempHour = 0;
+            hourList[i - 1] = tempHour;
+            i--;
+            h = h - tempHour;
+            tempHour = hours[i][h];
+        }
+
+        return hourList;
     }
+
 
     public int[] computeGrades(int totalHours) {
-        return gradeMap.get(totalHours);
+        gradeList = new int[numClasses];
+
+        for(int i = 0; i < numClasses; i++){
+            gradeList[i] = gf.grade(i, hourList[i]);
+        }
+
+        return gradeList;
     }
 
-    private void solution(int totalHours){
-        grades = new int[totalHours + 1][numClasses + 1];
-        hours = new int[totalHours + 1][numClasses + 1];
+
+    private void dynamicSolution(int totalHours){
+        grades = new int[numClasses + 1][totalHours + 1];
+        hours = new int[numClasses + 1][totalHours + 1];
 
         if(totalHours == 0 || numClasses == 0)
             return;
@@ -59,7 +88,7 @@ public class Program3 implements IProgram3 {
                 int hour = 0;
 
                 for(int j = 0; j <= h; j++){
-                    int grade = grades[h - j][i - 1] + gf.grade(i - 1, j);
+                    int grade = grades[i - 1][h - j] + gf.grade(i - 1, j);
 
                     if(grade > maxGrade) {
                         maxGrade = grade;
@@ -67,45 +96,16 @@ public class Program3 implements IProgram3 {
                     }
                 }
 
-                if(maxGrade > grades[h][i - 1]){
-                    grades[h][i] = maxGrade;
-                    hours[h][i] = hour;
+                if(maxGrade > grades[i - 1][h]){
+                    grades[i][h] = maxGrade;
+                    hours[i][h] = hour;
                 }
 
                 else{
-                    grades[h][i] = grades[h][i - 1];
-                    hours[h][i] = -1;
+                    grades[i][h] = grades[i - 1][h];
+                    hours[i][h] = -1;
                 }
             }
         }
-
-        int[] hourList = new int[numClasses];
-
-        int h = totalHours;
-        int i = numClasses;
-
-        while (i >= 0) {
-            if (hours[h][i] >= 0) {
-                break;
-            }
-            i--;
-        }
-
-        do {
-            hourList[i-1] = hours[h][i];
-            h = h - hours[h][i];
-            i--;
-        } while (i > 0 && hours[h][i] >= 0);
-
-        hourMap.put(totalHours, hourList);
-
-        int[] gradeList = new int[numClasses];
-
-        for(int k = 0; k < numClasses; k++) {
-            gradeList[k] = gf.grade(k, hourList[k]);
-        }
-
-        gradeMap.put(totalHours, gradeList);
     }
-
 }
