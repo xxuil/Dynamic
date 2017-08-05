@@ -1,4 +1,7 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
 public class MyGradeFunction implements GradeFunction {
     private int numClasses;
@@ -16,12 +19,10 @@ public class MyGradeFunction implements GradeFunction {
     public int grade(int classID, int hours){
         if(hours == 0)
             return 0;
-        if(hours < 2)
-            return 50;
 
-        if(hours > 10)
-            return 100;
+        else if(hours > 0 && hours < 100)
+            return maxGrade - hours % maxGrade;
 
-        else return 70;
+        else return 0;
     }
 }

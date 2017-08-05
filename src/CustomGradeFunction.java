@@ -1,6 +1,9 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
-public class CustomGradeFunction implements GradeFunction{
+public class CustomGradeFunction implements GradeFunction {
 
     private int numClasses;
     private int maxGrade;

@@ -1,4 +1,7 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
 
 public class Driver {
@@ -15,7 +18,7 @@ public class Driver {
 	    int h = Integer.parseInt(args[3]);
         int sum_grade;
         int maxgrade = 100;
-        SquareRootGradeFunction gf = new SquareRootGradeFunction(n, maxgrade);
+        SquareGradeFunction gf = new SquareGradeFunction(n, maxgrade);
         // SquareGradeFunction gf = new SquareGradeFunction(n, maxgrade);
 
         program.initialize(n, maxgrade, gf);

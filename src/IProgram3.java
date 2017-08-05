@@ -1,4 +1,7 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
 public interface IProgram3{
 

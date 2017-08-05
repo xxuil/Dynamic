@@ -1,7 +1,8 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
-
-import java.util.*;
 
 public class Program3 implements IProgram3 {
 

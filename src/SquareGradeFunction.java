@@ -1,7 +1,10 @@
-package lab3;
+/* EE 360c Lab 3
+ * Name: Xiangxing Liu
+ * EID: xl5587
+ */
 
 
-public class SquareGradeFunction implements GradeFunction{
+public class SquareGradeFunction implements GradeFunction {
 
     private int numClasses;
     private int maxGrade;
